@@ -1,16 +1,19 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Categories from "./pages/Categories";
+import Tags from "./pages/Tags";
+import Header from "./components/Header";
+import './index.css'
 
-import './App.css'
-
-function App() {
-
-
+export default function AppRoutes() {
   return (
     <>
-      <h1 class="text-3xl font-italic ">
-    Hello world!
-  </h1>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/tags" element={<Tags />} />
+      </Routes>
     </>
-  )
+  );
 }
-
-export default App
