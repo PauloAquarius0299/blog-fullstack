@@ -34,8 +34,13 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @PrePersist // Adicione esta anotação
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -47,8 +52,5 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, email, password, name, createdAt);
-    }
-    protected void onCreate(){
-        this.createdAt = LocalDateTime.now();
     }
 }
