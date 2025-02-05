@@ -41,4 +41,10 @@ public class CategoryServiceImpl  implements CategoryService {
             repository.deleteById(id);
         }
     }
+
+    @Override
+    public Categories getCategoryById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada pelo id" + id));
+    }
 }

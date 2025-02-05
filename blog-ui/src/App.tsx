@@ -20,7 +20,7 @@ export default function AppRoutes() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/tags" element={<Tags />} />
         <Route path='/posts' element={<NewPost />} />
-        <Route path='/draft' element={<NewDraft />} />
+        <Route path='/posts/drafts' element={<NewDraft />} /> 
       </Routes>
     </>
   );
