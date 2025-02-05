@@ -34,7 +34,7 @@ const Header = () => {
             <Link to='/posts'>+ Novo Post</Link>
           </button>
           <button className="bg-rose-400 cursor-pointer hover:bg-rose-500 text-white px-4 py-2 rounded-lg font-medium flex items-center justify-center">
-            <Link to='/draft'>Rascunho</Link>
+            <Link to='/posts/drafts'>Rascunho</Link>
           </button>
         </div>
 

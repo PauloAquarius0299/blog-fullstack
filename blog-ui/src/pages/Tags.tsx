@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TagsDTO, listTags, createTag, deleteTag } from "../services/tagsService";
+import { TagsDTO, listTags, createTag, deleteTag } from "../services/tagsService";;
 
 const Tags = () => {
   const [tags, setTags] = useState<TagsDTO[]>([]);
