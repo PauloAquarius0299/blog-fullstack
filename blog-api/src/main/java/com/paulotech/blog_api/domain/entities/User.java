@@ -37,7 +37,7 @@ public class User {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @PrePersist // Adicione esta anotação
+    @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }

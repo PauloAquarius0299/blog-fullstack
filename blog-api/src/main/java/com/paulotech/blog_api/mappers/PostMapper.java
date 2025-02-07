@@ -1,8 +1,10 @@
 package com.paulotech.blog_api.mappers;
 
 import com.paulotech.blog_api.domain.CreatePostRequest;
+import com.paulotech.blog_api.domain.UpdatePostRequest;
 import com.paulotech.blog_api.domain.dto.CreatePostRequestDto;
 import com.paulotech.blog_api.domain.dto.PostDto;
+import com.paulotech.blog_api.domain.dto.UpdatePostRequestDto;
 import com.paulotech.blog_api.domain.entities.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,5 +17,6 @@ public interface PostMapper {
     @Mapping(target = "category", source = "category")
     @Mapping(target = "tags", source = "tags")
     PostDto toDto(Post post);
-    CreatePostRequest toCreatePostRequest(CreatePostRequestDto post);
+    CreatePostRequest toCreatePostRequest(CreatePostRequestDto dto);
+    UpdatePostRequest toUpdatePostRequest(UpdatePostRequestDto dto);
 }
