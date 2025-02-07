@@ -26,7 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
-            String token = extractToken((HttpServletResponse) request);
+            String token = extractToken(request);
             if (token != null) {
                 UserDetails userDetails = authenticationService.validateToken(token);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -41,17 +41,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     request.setAttribute("userId", ((BlogUserDetails) userDetails).getId());
                 }
             }
-        } catch(Exception ex){
-            // Do not throw exception, just don't authentication user
-            log.warn("Recebeu o valor invalido do token de acesso");
+        } catch (Exception ex) {
+            // Do not throw exception, just don't authenticate the user
+            log.warn("Recebeu o valor inválido do token de acesso");
         }
         filterChain.doFilter(request, response);
-
     }
 
-    private String extractToken(HttpServletResponse request){
+    private String extractToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        if(bearerToken !=null && bearerToken.startsWith("Bearar")){
+        if (bearerToken != null && bearerToken.startsWith("Bearer")) {
             return bearerToken.substring(7);
         }
         return null;

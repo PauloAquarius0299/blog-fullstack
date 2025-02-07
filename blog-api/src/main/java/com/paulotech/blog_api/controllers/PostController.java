@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
 @RequestMapping(path = "api/v1/posts")
 @RequiredArgsConstructor
 public class PostController {
@@ -32,14 +31,14 @@ public class PostController {
     public ResponseEntity<List<PostDto>> getAllPosts(
             @RequestParam(required = false)UUID categoryId,
             @RequestParam(required = false) UUID tagId
-            ){
+    ){
         List<Post> posts = postsService.getAllPosts(categoryId, tagId);
         List<PostDto> postDtos = posts.stream().map(postMapper::toDto).toList();
         return ResponseEntity.ok(postDtos);
     }
 
     @GetMapping(path = "/drafts")
-    public ResponseEntity<List<PostDto>> getDrafts(@RequestParam UUID userId) {
+    public ResponseEntity<List<PostDto>> getDrafts(@RequestAttribute UUID userId) {
         User loggedInUser = userService.getUserById(userId);
         List<Post> draftPosts = postsService.getDraftsPosts(loggedInUser);
         List<PostDto> postDto = draftPosts.stream().map(postMapper::toDto).toList();
@@ -49,7 +48,7 @@ public class PostController {
     @PostMapping
     public ResponseEntity<PostDto> createPosts(
             @Valid @RequestBody CreatePostRequestDto createPostRequestDto,
-            @RequestParam UUID userId){
+            @RequestAttribute UUID userId){
         User loggedInUser = userService.getUserById(userId);
         CreatePostRequest createPostRequest = postMapper.toCreatePostRequest(createPostRequestDto);
         Post createdPost = postsService.createPost(loggedInUser, createPostRequest);
@@ -65,6 +64,21 @@ public class PostController {
         Post updatedPost = postsService.updatePost(id, updatePostRequest);
         PostDto  updatedPostDto = postMapper.toDto(updatedPost);
         return ResponseEntity.ok(updatedPostDto);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<PostDto> getPost(
+            @PathVariable UUID id
+    ){
+        Post post = postsService.getPost(id);
+        PostDto postDto = postMapper.toDto(post);
+        return ResponseEntity.ok(postDto);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable UUID id){
+        postsService.deletePost(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
