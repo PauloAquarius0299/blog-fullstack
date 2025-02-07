@@ -114,6 +114,9 @@ const Categories = () => {
               <div>
                 <h2 className="text-2xl font-bold mb-4">Detalhes da Categoria</h2>
                 <p>
+                  <strong>Id:</strong> {selectedCategory.id}
+                </p>
+                <p>
                   <strong>Nome:</strong> {selectedCategory.name}
                 </p>
                 <p>

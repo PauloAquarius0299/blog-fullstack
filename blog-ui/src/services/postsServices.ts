@@ -22,12 +22,33 @@ export interface PostsDTO {
   postStatus: string;
 }
 
+export interface CreatePostRequestDto {
+  title: string;
+  content: string;
+  author: string;
+  category: string;
+  tags: string[];
+  readingTime: number;
+  postStatus: string;
+}
+
 export const listPosts = async (): Promise<PostsDTO[]> => {
   try {
     const response = await api.get('/api/v1/posts');
     return response.data;
   } catch (error) {
     console.error('Erro ao buscar posts:', error);
+    throw error;
+  }
+};
+
+
+export const createPost = async (postData: CreatePostRequestDto): Promise<string> => {
+  try {
+    const response = await api.post('/api/v1/posts', postData);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao criar post:', error);
     throw error;
   }
 };

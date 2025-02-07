@@ -82,6 +82,7 @@ const Tags = () => {
               <table className="min-w-full table-auto">
                 <thead>
                   <tr>
+                  <th className="px-4 py-2 border">Id</th>
                     <th className="px-4 py-2 border">Nome</th>
                     <th className="px-4 py-2 border">Contagem de Posts</th>
                     <th className="px-4 py-2 border">Ações</th>
@@ -90,6 +91,7 @@ const Tags = () => {
                 <tbody>
                   {tags.map((tag) => (
                     <tr key={tag.id}>
+                       <td className="px-4 py-2 border">{tag.id}</td>
                       <td className="px-4 py-2 border">{tag.name}</td>
                       <td className="px-4 py-2 border">{tag.postCount}</td>
                       <td className="px-4 py-2 border">
